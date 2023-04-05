@@ -1,0 +1,15 @@
+name: ktemplate
+description: A Kitawi app
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <4.0.0"
+
+dependencies:
+  kitawi: any
+
+dev_dependencies:
+  build_runner: ^2.3.0
+  build_web_compilers: ^4.0.0
+  lints: ^2.0.0
