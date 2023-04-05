@@ -1,10 +1,13 @@
-
 import 'package:kitawi/kitawi.dart';
 
 void main() {
   run(
     [
-      Route(builder: (args) => App(), path: "/", name: "App"),
+      Route(
+        builder: (args) => App(),
+        path: "/",
+        name: "App",
+      ),
     ],
     id: 'root', // This is the id of element that will contain your app
     env: Environment.dev,
