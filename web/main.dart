@@ -1,62 +1,48 @@
-import 'package:kitawi/kitawi.dart';
+import 'package:kitawi/widgets.dart';
 
 void main() {
   run(
     [
-      Route(
-        builder: (args) => App(),
-        path: "/",
-        name: "App",
-      ),
+      Route(builder: (args) => Home(), path: "/", name: "home"),
     ],
-    id: 'root', // This is the id of element that will contain your app
-    env: Environment.dev,
+    id: "root",
   );
 }
 
-class App extends Layout {
-  final counter = ValueStream(0);
-  @override
-  Widget build() {
-    return SizedBox(
-      height: 100.percent,
-      width: 100.percent,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          StreamBuilder<int?>(
-            stream: counter.stream,
-            initialData: counter.value,
-            builder: (snapshot) => Text.h3(
-              "${snapshot.data}",
-            ),
-          ),
-          FloatingActionButton(
-            actions: [
-              Action(
-                type: 'click',
-                callback: (event) => counter.add(counter.value! + 1),
-              )
-            ],
-            decoration: Decoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            width: 48.px,
-            height: 48.px,
-            child: Icon(
-              IconData("add", type: "material-icons-outlined"),
-              size: 24.px,
-            ),
-          )
-        ],
-      ),
-    );
-  }
+class Home extends Layout {
+  int counter = 0;
 
   @override
-  void dispose() {
-    counter.dispose();
-    super.dispose();
+  Widget build() {
+    return Frame(
+      body: Center(
+        child: Text(
+          "Counter: $counter",
+          style: TextStyle(
+            fontSize: 24.px,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        actions: [
+          Action((p0) {
+            setState(() => counter++);
+          }, type: Actions.click)
+        ],
+        padding: EdgeInsets.all(12.px),
+        decoration: Decoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(
+            12.px,
+          ),
+        ),
+        child: Icon(
+          IconData(
+            "add",
+          ),
+        ),
+      ),
+    );
   }
 }
